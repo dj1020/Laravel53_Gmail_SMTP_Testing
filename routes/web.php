@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/testMail', function () {
+    $to = request()->get('mail');
+    Mail::raw('Hello World Mail to test mail sending', function($m) use ($to) {
+        $m->to($to)->subject('Testing mail');
+    });
+
+    return "Done, Mail sent to $to";
+});
